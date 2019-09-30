@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
 
 # one to one relationship with one image and user
 class Profile(models.Model):
@@ -8,3 +9,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
+    #override the save method
+    def save(self):
+        super().save()
+        #resize the image
+        img = Image.open(self.image.path)
+        #there are other effiecient ways to do this or if large project
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
