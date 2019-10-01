@@ -11,8 +11,8 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
     #override the save method
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
         #resize the image
         img = Image.open(self.image.path)
         #there are other effiecient ways to do this or if large project

@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
+  <h1 class="mb-3"> Post by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
 <!-- Informing that we want to put this information in the block posts to override the block content in the base file-->
     {% for post in posts %}
         <article class="media content-section">
@@ -37,5 +38,3 @@
     {% endif %}
 
 {% endblock content %}
-
-
